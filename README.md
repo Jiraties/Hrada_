@@ -110,8 +110,8 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:5173/Hrada_/** (the trailing `/Hrada_/` matches the `base` path used
-for GitHub Pages — see [Deployment](#deployment)).
+Open **http://localhost:5173/**. Local development and Vercel use the domain root;
+GitHub Pages uses `/Hrada_/` — see [Live Demo](#live-demo).
 
 There is no backend, no database, and no LLM call at runtime — all data lives in
 `src/data/`, and every figure on screen is computed in the browser.
@@ -201,12 +201,23 @@ The original product specification is kept in `spec/` for reference.
 
 ## Live Demo
 
+### Vercel
+
+Import the repository into Vercel. The checked-in `vercel.json` sets the Vite framework,
+`npm run build` build command, and `dist` output directory. Normal builds use `/` as the
+asset base, so JavaScript, styles, and fonts load from the domain root. After pulling
+deployment fixes, deploy the updated commit; redeploying an older commit keeps its old configuration.
+
+### GitHub Pages
+
 **https://pug-03.github.io/Hrada_/**
 
 Deployed automatically on every push to `main` via GitHub Actions
 (`.github/workflows/deploy.yml`) using the official `actions/deploy-pages` flow. The app uses
 `HashRouter` (URLs like `/Hrada_/#/dashboard`) since GitHub Pages has no server-side rewrite
 rule for a static SPA's clean routes.
+The Pages workflow builds with `npm run build -- --base=/Hrada_/` so only that deployment
+uses the repository prefix. Vercel uses the same hash routes without needing a rewrite rule.
 
 ## Testing
 

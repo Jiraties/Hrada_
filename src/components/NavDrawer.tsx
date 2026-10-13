@@ -32,7 +32,7 @@ export function NavDrawer({
       {open ? (
         <>
           <motion.div
-            className="fixed inset-0 z-40 bg-ink/70 sm:hidden"
+            className="fixed inset-0 z-40 bg-overlay/70 sm:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -74,7 +74,7 @@ export function NavDrawer({
                   className={({ isActive }) =>
                     cn(
                       'pointer-coarse:min-h-11 flex items-center rounded-lg px-3 py-2.5 text-small transition-colors duration-150',
-                      isActive ? 'bg-signal/15 text-text' : 'text-haze hover:bg-panel-raised hover:text-text',
+                      isActive ? 'bg-signal-soft text-accent-text' : 'text-haze hover:bg-panel-raised hover:text-text',
                     )
                   }
                 >

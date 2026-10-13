@@ -85,7 +85,7 @@ export function RoleSwitcher() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute right-0 z-40 mt-2 w-75 max-w-[calc(100vw-2rem)] rounded-xl border border-line bg-panel p-2 shadow-xl shadow-black/50"
+              className="absolute right-0 z-40 mt-2 w-75 max-w-[calc(100vw-2rem)] rounded-xl border border-line bg-panel p-2 shadow-xl shadow-shadow/20"
             >
               <Group label={t('role.groupOrg')}>
                 <Item onClick={() => go(useSession.getState().signInAsHR)}>{t('role.hr')}</Item>

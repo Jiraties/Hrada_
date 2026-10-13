@@ -44,7 +44,7 @@ export function SlidePanel({
             exit={{ opacity: 0 }}
             transition={{ duration: reduced ? 0.12 : 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 z-40 bg-ink/70 backdrop-blur-[2px]"
+            className="fixed inset-0 z-40 bg-overlay/70 backdrop-blur-[2px]"
           />
           <motion.aside
             key="panel"

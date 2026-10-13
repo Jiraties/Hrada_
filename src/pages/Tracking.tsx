@@ -63,7 +63,7 @@ export default function Tracking() {
                   key={option}
                   onClick={() => setMode(option)}
                   className={`pointer-coarse:min-h-11 rounded-md px-3 py-1.5 text-small transition-colors duration-150 ${
-                    mode === option ? 'bg-signal/20 text-text' : 'text-haze hover:text-text'
+                    mode === option ? 'bg-signal-selected text-accent-text' : 'text-haze hover:text-text'
                   }`}
                 >
                   {option === 'individual' ? t('tracking.individual') : t('tracking.team')}

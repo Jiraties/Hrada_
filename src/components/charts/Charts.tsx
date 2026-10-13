@@ -54,7 +54,7 @@ function ChartTooltip({
         borderRadius: 8,
         fontSize: 12,
         color: colors.text,
-        boxShadow: `0 8px 24px ${withAlpha(colors.ink, 0.55)}`,
+        boxShadow: `0 8px 24px ${withAlpha(colors.shadow, 0.18)}`,
         padding: '6px 10px',
       }}
       wrapperStyle={{ outline: 'none' }}

@@ -143,7 +143,7 @@ export default function Dashboard() {
             </Badge>
           }
         />
-        <div className="bg-gradient-to-b from-signal/[0.07] to-transparent px-3 pb-4">
+        <div className="constellation-surface bg-gradient-to-b from-signal/[0.07] to-transparent px-3 pb-4">
           <SkillConstellation employees={employees} />
         </div>
       </Card>

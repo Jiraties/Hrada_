@@ -3,7 +3,10 @@ import { createRoot } from 'react-dom/client'
 import { HashRouter } from 'react-router-dom'
 
 import App from './App.tsx'
+import { applyTheme, useTheme } from './store/theme'
 import './index.css'
+
+applyTheme(useTheme.getState().theme)
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

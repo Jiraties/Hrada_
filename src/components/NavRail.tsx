@@ -72,7 +72,7 @@ export function NavRail({ nav }: { nav: NavItem[] }) {
               className={({ isActive }) =>
                 cn(
                   'pointer-coarse:min-h-11 flex items-center gap-3 rounded-lg px-2.5 py-2 text-small transition-colors duration-150',
-                  isActive ? 'bg-signal/15 text-text' : 'text-haze hover:bg-panel-raised hover:text-text',
+                  isActive ? 'bg-signal-soft text-accent-text' : 'text-haze hover:bg-panel-raised hover:text-text',
                 )
               }
             >

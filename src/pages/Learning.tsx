@@ -3,6 +3,8 @@ import { Check, TriangleAlert } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 import { EmployeePicker } from '@/components/EmployeePicker'
+import { LearningCourseCard } from '@/components/LearningCourseCard'
+import { LearningProjectCard } from '@/components/LearningProjectCard'
 import { Badge } from '@/components/ui/Badge'
 import { Card, CardHeader } from '@/components/ui/Card'
 import { LevelBar } from '@/components/ui/LevelBar'
@@ -149,6 +151,20 @@ export default function Learning() {
                   const isDone = completed.includes(step.id)
                   const isStarted = started.includes(step.id)
                   const title = renderTitle(step.title)
+                  if (step.type === 'Course' || step.type === 'Workshop') {
+                    return (
+                      <li key={step.id}>
+                        <LearningCourseCard employeeId={employee.id} step={step} title={title} index={index} />
+                      </li>
+                    )
+                  }
+                  if (step.type === 'Project') {
+                    return (
+                      <li key={step.id}>
+                        <LearningProjectCard employee={employee} step={step} title={title} index={index} />
+                      </li>
+                    )
+                  }
                   return (
                     <li key={step.id}>
                       <div

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import {
-  colors,
+  darkColors as colors,
   DEPARTMENT_ORDER,
   departmentColor,
   departmentHalo,

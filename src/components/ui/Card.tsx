@@ -26,7 +26,7 @@ export function Card({ children, className, tone = 'flat', interactive = false }
   return (
     <div
       className={cn(
-        'rounded-xl border',
+        'surface-card rounded-xl border',
         tones[tone],
         interactive &&
           'transition-[background-color,transform] duration-150 hover:bg-panel-raised hover:-translate-y-0.5',

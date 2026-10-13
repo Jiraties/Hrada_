@@ -27,7 +27,7 @@ import {
   type TwinklePlan,
   type Vec2,
 } from '@/lib/constellation'
-import { colors, departmentHalo, departmentSwatch, motion as motionTokens } from '@/lib/theme'
+import { colors, themedDepartmentColor, motion as motionTokens } from '@/lib/theme'
 import { useName, useT } from '@/lib/i18n'
 import { NumericText } from '@/components/ui/NumericText'
 
@@ -458,8 +458,8 @@ export function SkillConstellation({
           <div
             className={
               coarse
-                ? 'absolute top-0 left-0 z-10 rounded-lg border border-line bg-panel-raised px-2.5 py-1.5 text-micro shadow-lg shadow-black/50'
-                : 'pointer-events-none absolute top-0 left-0 z-10 rounded-lg border border-line bg-panel-raised px-2.5 py-1.5 text-micro shadow-lg shadow-black/50'
+                ? 'absolute top-0 left-0 z-10 rounded-lg border border-line bg-panel-raised px-2.5 py-1.5 text-micro shadow-lg shadow-shadow/20'
+                : 'pointer-events-none absolute top-0 left-0 z-10 rounded-lg border border-line bg-panel-raised px-2.5 py-1.5 text-micro shadow-lg shadow-shadow/20'
             }
             style={{
               // top-0/left-0 above pins this to the wrapper's origin before
@@ -506,7 +506,7 @@ export function SkillConstellation({
           <span key={department} className="inline-flex items-center gap-1.5">
             <span
               className="size-2 rounded-full"
-              style={{ backgroundColor: departmentSwatch(department) }}
+              style={{ backgroundColor: themedDepartmentColor(department, 0.95) }}
             />
             {department}
           </span>
@@ -799,7 +799,8 @@ const Node = memo(function Node({
         cx={node.x}
         cy={node.y}
         r={node.r + (active ? 5 : 3)}
-        fill={departmentHalo(node.department)}
+        data-node-halo
+        fill={themedDepartmentColor(node.department, 0.24)}
       />
 
       {/*
@@ -830,12 +831,14 @@ const Node = memo(function Node({
           cx={node.x}
           cy={node.y}
           r={node.r * 2.4}
+          data-hover-glow
           fill="url(#node-glow-gradient)"
           opacity={Math.min(1, 0.9 * glowBoost)}
         />
       ) : null}
 
       <motion.circle
+        data-node-core
         layoutId={`employee-node-${node.employee.id}`}
         cx={node.x}
         cy={node.y}

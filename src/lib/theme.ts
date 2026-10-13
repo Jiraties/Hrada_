@@ -1,14 +1,15 @@
 /**
  * Design tokens, mirrored from the @theme block in src/index.css so TypeScript
- * (charts, SVG, canvas) can reach the same values Tailwind uses.
+ * (charts and SVG) can reach the same values Tailwind uses.
  *
- * The palette is closed — §3.1 lists these ten colours and nothing else ships.
+ * Both modes keep the same semantic palette; light mode deepens text accents
+ * and softens tinted surfaces rather than reusing luminous dark-mode colours.
  * `sky` carries meaning rather than style: it marks a number a scoring function
  * produced. Using it to make something look nice breaks the association the
  * whole interface depends on, so growth and positive movement use it too
  * (never green), and decoration uses none of it.
  */
-export const colors = {
+export const darkColors = {
   ink: '#070B12',
   panel: '#0F1826',
   panelRaised: '#141F30',
@@ -19,6 +20,55 @@ export const colors = {
   text: '#E6EEF9',
   warn: '#F59E0B',
   critical: '#F87171',
+  onSignal: '#FFFFFF',
+  overlay: '#070B12',
+  shadow: '#000000',
+  courseCover: '#182B4E',
+  courseCoverText: '#E6EEF9',
+  courseCoverMuted: '#8AA2C0',
+  workshopCover: '#2D2925',
+  workshopCoverText: '#E6EEF9',
+  workshopCoverMuted: '#8AA2C0',
+} as const
+
+/** Light surfaces use deeper accents so small labels keep their contrast. */
+export const lightColors = {
+  ink: '#F6F6F3',
+  panel: '#FFFFFF',
+  panelRaised: '#F8F9FA',
+  line: '#E0E4E8',
+  signal: '#355EA7',
+  sky: '#246B86',
+  haze: '#596575',
+  text: '#242F3E',
+  warn: '#9A5700',
+  critical: '#BC3030',
+  onSignal: '#FFFFFF',
+  overlay: '#070B12',
+  shadow: '#242F3E',
+  courseCover: '#D4E5F5',
+  courseCoverText: '#233F65',
+  courseCoverMuted: '#465F7A',
+  workshopCover: '#F3E3BA',
+  workshopCoverText: '#574323',
+  workshopCoverMuted: '#6D5B39',
+} as const
+
+/** CSS references keep SVG, charts and inline styles in sync without remounting. */
+export const colors = {
+  ink: 'var(--color-ink)',
+  panel: 'var(--color-panel)',
+  panelRaised: 'var(--color-panel-raised)',
+  line: 'var(--color-line)',
+  signal: 'var(--color-signal)',
+  sky: 'var(--color-sky)',
+  haze: 'var(--color-haze)',
+  text: 'var(--color-text)',
+  warn: 'var(--color-warn)',
+  critical: 'var(--color-critical)',
+  onSignal: 'var(--color-on-signal)',
+  overlay: 'var(--color-overlay)',
+  shadow: 'var(--color-shadow)',
 } as const
 
 /** §3.2 — the only type sizes in the system. */
@@ -52,6 +102,9 @@ export const motion = {
  * outside §3.1 by degrees.
  */
 export function withAlpha(color: string, alpha: number): string {
+  if (!color.startsWith('#')) {
+    return `color-mix(in srgb, ${color} ${(alpha * 100).toFixed(1)}%, transparent)`
+  }
   const hex = color.replace('#', '')
   const r = parseInt(hex.slice(0, 2), 16)
   const g = parseInt(hex.slice(2, 4), 16)
@@ -90,8 +143,8 @@ function hslString({ h, s, l }: Hsl, alpha: number): string {
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 
-const SKY_HSL = hexToHsl(colors.sky)
-const SIGNAL_HSL = hexToHsl(colors.signal)
+const SKY_HSL = hexToHsl(darkColors.sky)
+const SIGNAL_HSL = hexToHsl(darkColors.signal)
 
 /**
  * Order the constellation clusters render in — Marketing sits at the `sky`
@@ -133,6 +186,16 @@ export function departmentHalo(department: string): string {
 /** Legend key and anything else that needs the identity to actually read. */
 export function departmentSwatch(department: string): string {
   return departmentColor(department, 0.95)
+}
+
+/** Rendered department identities use the active mode's two blue endpoints. */
+export function themedDepartmentColor(department: string, alpha = 1): string {
+  const index = DEPARTMENT_ORDER.indexOf(department)
+  const weight = index === -1 ? 0.5 : index / (DEPARTMENT_ORDER.length - 1)
+  return withAlpha(
+    `color-mix(in hsl, ${colors.sky} ${(1 - weight) * 100}%, ${colors.signal})`,
+    alpha,
+  )
 }
 
 /**

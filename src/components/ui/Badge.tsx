@@ -7,7 +7,7 @@ type Tone = 'neutral' | 'sky' | 'signal' | 'warn' | 'critical' | 'muted'
 const tones: Record<Tone, string> = {
   neutral: 'border-line bg-panel-raised text-text',
   sky: 'border-sky/40 bg-sky/10 text-sky',
-  signal: 'border-signal/50 bg-signal/15 text-sky',
+  signal: 'border-signal/50 bg-signal-soft text-sky',
   warn: 'border-warn/40 bg-warn/10 text-warn',
   critical: 'border-critical/40 bg-critical/10 text-critical',
   muted: 'border-line/70 bg-transparent text-haze',

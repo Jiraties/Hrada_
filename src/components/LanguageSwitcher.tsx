@@ -27,7 +27,7 @@ export function LanguageSwitcher() {
           aria-pressed={locale === option}
           className={cn(
             'pointer-coarse:min-h-11 pointer-coarse:min-w-11 rounded-md px-2 py-1 text-micro transition-colors duration-150',
-            locale === option ? 'bg-signal/20 text-text' : 'text-haze hover:text-text',
+            locale === option ? 'bg-signal-selected text-accent-text' : 'text-haze hover:text-text',
           )}
         >
           {t(`locale.${option}`)}

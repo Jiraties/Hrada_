@@ -13,6 +13,7 @@ import { LanguageSwitcher } from './LanguageSwitcher'
 import { NavDrawer } from './NavDrawer'
 import { NavRail } from './NavRail'
 import { RoleSwitcher } from './RoleSwitcher'
+import { ThemeToggle } from './ThemeToggle'
 import { NumericText } from './ui/NumericText'
 import { ToastHost } from './ui/Toast'
 
@@ -50,7 +51,7 @@ export function Layout() {
         <>
           <NavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} nav={nav} />
           <NavRail nav={nav} />
-          <aside className="sticky top-0 hidden h-screen w-62 shrink-0 flex-col border-r border-line bg-panel/60 px-3 py-4 lg:flex">
+          <aside className="app-sidebar sticky top-0 hidden h-screen w-62 shrink-0 flex-col border-r border-line bg-panel/60 px-3 py-4 lg:flex">
             <div className="px-2 pb-5">
               <p className="text-section font-semibold tracking-tight">HRADA</p>
               <p className="mt-0.5 text-micro text-haze">
@@ -66,7 +67,7 @@ export function Layout() {
                     cn(
                       'rounded-lg px-3 py-2 text-small transition-colors duration-150',
                       isActive
-                        ? 'bg-signal/15 text-text'
+                        ? 'bg-signal-soft text-accent-text'
                         : 'text-haze hover:bg-panel-raised hover:text-text',
                     )
                   }
@@ -81,7 +82,7 @@ export function Layout() {
       ) : null}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-20 flex items-center justify-between gap-4 border-b border-line bg-ink/85 px-5 py-3 backdrop-blur">
+        <header className="app-header sticky top-0 z-20 flex items-center justify-between gap-4 border-b border-line bg-ink/85 px-5 py-3 backdrop-blur">
           <div className="flex items-center gap-2">
             {session.role ? (
               <button
@@ -95,9 +96,12 @@ export function Layout() {
             <span className="text-body font-semibold lg:hidden">HRADA</span>
           </div>
           <div className="hidden text-small text-haze lg:block">{t('app.tagline')}</div>
-          <div className="hidden items-center gap-2 sm:flex">
-            <LanguageSwitcher />
-            <RoleSwitcher />
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <div className="hidden items-center gap-2 sm:flex">
+              <LanguageSwitcher />
+              <RoleSwitcher />
+            </div>
           </div>
         </header>
 
